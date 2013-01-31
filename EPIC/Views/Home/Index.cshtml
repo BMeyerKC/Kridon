@@ -1,0 +1,227 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "EPIC";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evidence Practice Instructional Components</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script src="/Scripts/handlebars.js"></script>
+    <style>
+        .normal
+        {
+            white-space: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <div data-role="page">
+
+        <div data-role="header" data-position="fixed">
+            <h1>EPIC - by Kridon</h1>
+            <a href="#" data-icon="check" class="ui-btn-right">Save</a>
+        </div>
+        <!-- /header -->
+
+        <div data-role="content" id="epicContent">
+            <form action="Index.cshtml" method="POST">
+                <ul data-role="listview" id="epicList">
+                    <li data-role="fieldcontain">
+                        <label for="Observee">Observee :</label>
+                        <input type="text" name="Observee" />
+                    </li>
+                    <li data-role="fieldcontain">
+                        <label for="Observer">Observer  :</label>
+                        <input type="text" name="Observer" />
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <!-- /content -->
+
+    </div>
+    <!-- /page -->
+
+    <script type="text/javascript">
+        var epicItem = [{
+            title: "Lesson Preparation",
+            name: "LessonPrep",
+            criteria: [
+                {
+                    title: "Post content objectives clearly for students",
+                    name: "LessonPrep1"
+                },
+                {
+                    title: "Adapt content (e.g., text, assignment) to all levels of student proficiency",
+                    name: "LessonPrep2"
+                },
+                {
+                    title: "Relevent activities and simulations integrating lesson concepts (e.g., surveys, letter writing, constructing models, critiques)",
+                    name: "LessonPrep3"
+                }
+            ]
+        },
+            {
+                title: "Prior Cognitive Ability",
+                name: "PriorCognitiveAbility",
+                criteria: [
+                    {
+                        title: "Explicity link concepts to students' background and experiences",
+                        name: "PriorCognitiveAbility1"
+                    },
+                    {
+                        title: "Create clear connections between past learning and new concepts",
+                        name: "PriorCognitiveAbility2"
+                    },
+                    {
+                        title: "Emphasize key vocabulary for mastery learning",
+                        name: "PriorCognitiveAbility3"
+                    }
+                ]
+            }
+        ,
+            {
+                title: "Comprehensible Input",
+                name: "ComprehesibleInput",
+                criteria: [
+                    {
+                        title: "Use speech appropriate for students' proficiency level (e.g., slower rate, enunciation and simple sentence structure as appropriate)",
+                        name: "ComprehesibleInput1"
+                    },
+                    {
+                        title: "Explain academic tasks clearly",
+                        name: "ComprehesibleInput2"
+                    },
+                    {
+                        title: "Implore a variety learner modalities to make content concepts clear (e.g., modeling, visuals, hands-on activities, demonstrations, ",
+                        name: "ComprehesibleInput3"
+                    }
+                ]
+            },
+            {
+                title: "Rigorous Learning Strategies",
+                name: "RigorousLearningStrategies",
+                criteria: [
+                    {
+                        title: "Provide ample opportunities for students to use and organize strategies (e.g., problem solving, predicting, organizing, summarizing, ",
+                        name: "RigorousLearningStrategies1"
+                    },
+                    {
+                        title: "Maintain high levels of challenge of goals",
+                        name: "RigorousLearningStrategies2"
+                    },
+                    {
+                        title: "Use a variety of question types including those that promote higher-order thinking skills throughout the lesson (literal, analytical and interpretive questions)",
+                        name: "RigorousLearningStrategies3"
+                    }
+                ]
+            },
+            {
+                title: "Interaction",
+                name: "Interaction",
+                criteria: [
+                    {
+                        title: "Provide frequent opportunities for interaction and discussion between teacher / student and amoung students and encourage elaborated responses",
+                        name: "Interaction1"
+                    },
+                    {
+                        title: "Use group configurations that support objectives of the lesson and student ability",
+                        name: "Interaction2"
+                    },
+                    {
+                        title: "Provide opportunites for peer feedback and constructive critiquing",
+                        name: "Interaction3"
+                    }
+                ]
+            },
+            {
+                title: "Practice / Application",
+                name: "PracticeApplication",
+                criteria: [
+                    {
+                        title: "Provide hands-on materials and/or advance organizers for students to practice using new content knowledge",
+                        name: "PracticeApplication1"
+                    },
+                    {
+                        title: "Provide an active, yet structured,  environment for students to apply content and language knowledge in the classroom",
+                        name: "PracticeApplication2"
+                    },
+                    {
+                        title: "Provide activities/homework integrating language skills (i.e., reading, writing, listening and speaking)",
+                        name: "PracticeApplication3"
+                    }
+                ]
+            },
+            {
+                title: "Lesson Delivery",
+                name: "LessonDelivery",
+                criteria: [
+                    {
+                        title: "Engage students 100% of the period",
+                        name: "LessonDelivery1"
+                    },
+                    {
+                        title: "Use scaffolding techniques conistently (providing the right amount of support to move students from one level of understanding to a higher level) throughout lesson",
+                        name: "LessonDelivery2"
+                    },
+                    {
+                        title: "Pace the lesson to match the student ability level",
+                        name: "LessonDelivery3"
+                    }
+                ]
+            },
+            {
+                title: "Review / Assessment",
+                name: "ReviewAssessment",
+                criteria: [
+                    {
+                        title: "Comprehensively review key vocabulary, concepts, and objectives culminating direct instruction with opportunities for interaction ",
+                        name: "ReviewAssessment1"
+                    },
+                    {
+                        title: "Provide feedback to students regularly on their output (e.g., assignment, content, product)",
+                        name: "ReviewAssessment2"
+                    },
+                    {
+                        title: "Provide remediation to students, as appropriate",
+                        name: "ReviewAssessment3"
+                    }
+                ]
+            }];
+
+        $(function () {
+            var data = epicItem;
+            var template = $("#epicItemTemplate").html();
+            var html = Handlebars.compile(template)(data);
+            $(html).appendTo("#epicList").trigger("create");
+            $("#epicList").listview("refresh");
+        });
+    </script>
+    <script id="epicItemTemplate" type="text/html">
+        {{#this}}
+        <li data-role="list-divider">{{title}}</li>
+        <li data-role="fieldcontain">{{#each criteria}}
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend></legend>
+                <p class="normal">{{title}}</p>
+                <input type="radio" name="{{name}}" id="{{name}}-1" value="1" /><label for="{{name}}-1">1</label>
+                <input type="radio" name="{{name}}" id="{{name}}-2" value="2" /><label for="{{name}}-2">2</label>
+                <input type="radio" name="{{name}}" id="{{name}}-3" value="3" /><label for="{{name}}-3">3</label>
+                <input type="radio" name="{{name}}" id="{{name}}-4" value="4" /><label for="{{name}}-4">4</label>
+                <input type="radio" name="{{name}}" id="{{name}}-5" value="5" /><label for="{{name}}-5">5</label>
+            </fieldset>
+            <br />
+            {{/each}}
+        </li>
+        {{/this}}
+    </script>
+</body>
+</html>
