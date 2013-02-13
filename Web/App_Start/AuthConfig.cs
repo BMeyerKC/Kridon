@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
@@ -22,9 +23,7 @@ namespace Web
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            OAuthWebSecurity.RegisterFacebookClient(
-                appId: "164956923537748",
-                appSecret: "e54df5b42942a820863766540a2243db");
+            OAuthWebSecurity.RegisterFacebookClient("164956923537748", ConfigurationManager.AppSettings["fbsecret"]);
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }
